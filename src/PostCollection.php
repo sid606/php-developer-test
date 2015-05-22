@@ -5,14 +5,13 @@ namespace LittleThings;
 use IteratorAggregate;
 use JsonSerializable;
 
-class PostCollection implements IteratorAggregate, JsonSerializable
-{
+class PostCollection implements IteratorAggregate, JsonSerializable {
     /**
      * Collection of LittleThing\Post objects
      *
      * @var array
      **/
-    protected $posts = [];
+    protected $posts = array();
 
     /**
      * Constructor
@@ -20,8 +19,7 @@ class PostCollection implements IteratorAggregate, JsonSerializable
      * @param array $posts
      * @return void
      **/
-    public function __construct(array $posts)
-    {
+    public function __construct($posts) {
         $this->posts = $posts;
     }
 
@@ -30,8 +28,15 @@ class PostCollection implements IteratorAggregate, JsonSerializable
      *
      * @return integer
      **/
-    public function count()
-    {
+    public function count() {
         return count($this->posts);
+    }
+
+    function jsonSerialize() {
+        return $this->posts;
+    }
+
+    function getIterator() {
+        return new \ArrayIterator($this->posts);
     }
 }

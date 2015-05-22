@@ -5,8 +5,7 @@ namespace LittleThings;
 use JsonSerializable;
 use DateTime;
 
-class Post implements JsonSerializable
-{
+class Post implements JsonSerializable {
     /**
      * @var integer
      **/
@@ -24,12 +23,12 @@ class Post implements JsonSerializable
 
     /**
      * @var string
-     **/    
+     **/
     protected $title;
 
     /**
      * @var string
-     **/    
+     **/
     protected $slug;
 
     /**
@@ -42,13 +41,12 @@ class Post implements JsonSerializable
      * @var string $slug
      * @return null
      **/
-    public function __construct($id, $date, $authorId, $title, $slug)
-    {
-        $this->id       = $id;
-        $this->date     = new DateTime($date);
+    public function __construct($id, $date, $authorId, $title, $slug) {
+        $this->id = $id;
+        $this->date = new DateTime($date);
         $this->authorId = $authorId;
-        $this->title    = $title;
-        $this->slug     = $slug;
+        $this->title = $title;
+        $this->slug = $slug;
     }
 
     /**
@@ -57,8 +55,17 @@ class Post implements JsonSerializable
      * @param string $name
      * @return mixed
      **/
-    public function __get($name)
-    {
+    public function __get($name) {
         return $this->$name;
+    }
+
+    function jsonSerialize() {
+        return [
+            'id' => $this->id,
+            'date' => $this->date,
+            'authorId' => $this->authorId,
+            'title' => $this->title,
+            'slug' => $this->slug
+        ];
     }
 }
